@@ -1,0 +1,33 @@
+<navbar></navbar>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>hubebook</h1>
+    <p class="lead">Uma loja simples pra registrar aluguel de livros.</p>
+    <img class="img-responsive  center-block" src="assets/images/300.png" alt="reLoja 300" width="150" style="filter: invert(100%)">
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Livros Importantes:</h1>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="product in products">
+        <li><a ui-sref="viewProduct({id: product._id})" tooltip="{{product.description}}">
+          {{product.title}} -
+          <span class="text-muted">{{product.price | currency}}</span>
+        </a></li>
+      </ul>
+    </div>
+  </div>
+
+  <form class="thing-form">
+    <p class="input-group">      
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-lg btn-success btn-block" ui-sref="newProduct()">Cadastrar Novo Livro</button>
+      </span>
+    </p>
+  </form>
+</div>
+
+<footer></footer>
