@@ -16,13 +16,14 @@
         <li><a ui-sref="viewProduct({id: product._id})" tooltip="{{product.description}}">
           {{product.title}} -
           <span class="text-muted">{{product.price | currency}}</span>
+          <!--<button type="button" class="close" ng-click="deleteProduct()">×</button>-->
         </a></li>
       </ul>
     </div>
   </div>
 
   <form class="thing-form">
-    <p class="input-group">      
+    <p class="input-group">
       <span class="input-group-btn">
         <button type="submit" class="btn btn-lg btn-success btn-block" ui-sref="newProduct()">Cadastrar Novo Livro</button>
       </span>

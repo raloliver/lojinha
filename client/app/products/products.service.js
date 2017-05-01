@@ -58,7 +58,7 @@ angular.module('reLojaApp')
       delete: function (params) {
         angular.forEach(sampleProducts, function (product, index) {
           if (product._id == params._id) {
-            console.info(product, index);
+            console.warn(product, index);
             sampleProducts.splice(index, 1);
             return;
           }
@@ -66,7 +66,7 @@ angular.module('reLojaApp')
       },
 
       create: function (product) {
-        product.id = ++last_id;
+        product._id = ++last_id;
         sampleProducts.push(product);
       },
 
