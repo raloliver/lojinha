@@ -1,5 +1,8 @@
 'use strict';
 
+var errorHandler;
+var uploadHander;
+
 angular.module('reLojaApp')
 
   .controller('ProductsCtrl', function ($scope, Product) {
@@ -12,26 +15,74 @@ angular.module('reLojaApp')
     });
 
     $scope.deleteProduct = function () {
-      Product.delete($scope.product);
-      $state.go('products');
+      Product.delete({
+        id: $scope.product._id
+      }, function success( /* value, responseHeaders */ ) {
+        $state.go('products');
+      }, errorHandler($scope));
     };
   })
 
   .controller('ProductNewCtrl', function ($scope, $state, Product) {
     $scope.product = {}; // create a new instance
     $scope.addProduct = function () {
-      Product.create($scope.product);
-      $state.go('products');
+      Product.save($scope.product,
+        function success(value /*, responseHeaders*/ ) {
+          $state.go('viewProduct', {
+            id: value._id
+          });
+        }, errorHandler($scope));
+
     };
   })
 
-  .controller('ProductEditCtrl', function ($scope, $state, $stateParams, Product) {
+  .controller('ProductEditCtrl', function ($scope, $state, $stateParams, Product, Upload, $timeout) {
     $scope.product = Product.get({
       id: $stateParams.id
     });
-
     $scope.editProduct = function () {
-      Product.update($scope.product);
-      $state.go('products');
+      Product.update({
+          id: $scope.product._id
+        }, $scope.product,
+        function success(value /*, responseHeaders*/ ) {
+          $state.go('viewProduct', {
+            id: value._id
+          });
+        }, errorHandler($scope));
     };
+
+    $scope.upload = uploadHander($scope, Upload, $timeout);
   });
+
+errorHandler = function ($scope) {
+  return function error(httpResponse) {
+    $scope.errors = httpResponse;
+  }
+};
+
+uploadHander = function ($scope, Upload, $timeout) {
+  return function (file) {
+    if (file && !file.$error) {
+      $scope.file = file;
+      file.upload = Upload.upload({
+        url: '/api/products/' + $scope.product._id + '/upload',
+        file: file
+      });
+
+      file.upload.then(function (response) {
+        $timeout(function () {
+          file.result = response.data;
+        });
+      }, function (response) {
+        if (response.status > 0) {
+          console.info(response.status + ': ' + response.data);
+          errorHandler($scope)(response.status + ': ' + response.data);
+        }
+      });
+
+      file.upload.progress(function (event) {
+        file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total))
+      });
+    }
+  }
+};

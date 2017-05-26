@@ -6,7 +6,7 @@
     <div class="col-sm-6 col-md-4" ng-repeat="product in products">
       <div class="thumbnail">
         <a ui-sref="viewProduct({id: product._id})">
-          <img src="https://api.adorable.io/avatars/300x200/{{product.title}}" alt="{{product.title}}" class="img-reponsive center-block img-rounded">
+          <img src="{{product.imageUrl}}" alt="{{product.title}}" class="img-reponsive center-block img-rounded">
         </a>
         <div class="caption">
           <h3>{{product.title}}</h3>
