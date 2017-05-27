@@ -7,16 +7,16 @@ describe('Controller: MainController', function() {
   beforeEach(module('stateMock'));
   beforeEach(module('socketMock'));
 
-  var scope;
   var MainController;
+  var scope;
   var state;
   var $httpBackend;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function(_$httpBackend_, $controller, $rootScope, $state) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/things')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+    $httpBackend.expectGET('/api/products')
+      .respond(['Product 1', 'Product 2', 'Product 3', 'Product 4']);
 
     scope = $rootScope.$new();
     state = $state;
@@ -25,8 +25,8 @@ describe('Controller: MainController', function() {
     });
   }));
 
-  it('should attach a list of things to the controller', function() {
+  it('should attach a list of things to the scope', function() {
     $httpBackend.flush();
-    expect(MainController.awesomeThings.length).to.equal(4);
+    expect(scope.products.length).to.equal(4);
   });
 });
