@@ -416,13 +416,19 @@ module.exports = function (grunt) {
       heroku: {
         options: {
           remote: 'heroku',
-          branch: 'master'
+          branch: 'api-rest'
         }
       },
       openshift: {
         options: {
           remote: 'openshift',
           branch: 'master'
+        }
+      },
+      azure: {
+        options: {
+          remote: 'azure',
+          branch: 'api-rest'
         }
       }
     },

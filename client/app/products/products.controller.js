@@ -57,7 +57,7 @@ angular.module('reLojaApp')
 errorHandler = function ($scope) {
   return function error(httpResponse) {
     $scope.errors = httpResponse;
-  }
+  };
 };
 
 uploadHander = function ($scope, Upload, $timeout) {
@@ -81,8 +81,8 @@ uploadHander = function ($scope, Upload, $timeout) {
       });
 
       file.upload.progress(function (event) {
-        file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total))
+        file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
       });
     }
-  }
+  };
 };
