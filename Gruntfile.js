@@ -416,7 +416,7 @@ module.exports = function (grunt) {
       heroku: {
         options: {
           remote: 'heroku',
-          branch: 'image-upload',
+          branch: 'master',
           tag: pkg.version
         }
       },
