@@ -7,7 +7,7 @@ var multiparty = require('connect-multiparty');
 var router = express.Router();
 var uploadOptions = {
   autoFile: true,
-  uploadDir: 'client/assets/uploads/'
+  uploadDir: 'client/assets/images/uploads'
 }
 
 router.get('/', controller.index);
