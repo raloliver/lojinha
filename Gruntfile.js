@@ -8,7 +8,7 @@ module.exports = function (grunt) {
   } catch (e) {
     localConfig = {};
   }
-
+  var pkg = require('./package.json');
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
     express: 'grunt-express-server',
@@ -416,7 +416,8 @@ module.exports = function (grunt) {
       heroku: {
         options: {
           remote: 'heroku',
-          branch: 'api-rest'
+          branch: 'image-upload',
+          tag: pkg.version
         }
       },
       openshift: {

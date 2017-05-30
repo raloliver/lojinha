@@ -19,6 +19,6 @@ module.exports = {
           process.env.MONGOHQ_URL ||
           process.env.OPENSHIFT_MONGODB_DB_URL +
           process.env.OPENSHIFT_APP_NAME ||
-          'mongodb://localhost/reloja'
+          'mongodb://raloliver:bliv2017@ds157571.mlab.com:57571/reloja300'
   }
 };
