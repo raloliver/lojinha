@@ -26,13 +26,13 @@ angular.module('reLojaApp')
   .controller('ProductNewCtrl', function ($scope, $state, Product) {
     $scope.product = {}; // create a new instance
     $scope.addProduct = function () {
-      Product.save($scope.product,
-        function success(value /*, responseHeaders*/ ) {
-          $state.go('viewProduct', {
-            id: value._id
-          });
-        }, errorHandler($scope));
-
+      return Product.save($scope.product).$promise.then(function (product) {
+        return Product.upload($scope.product.picture, product._id);
+      }).then(function (product) {
+        $state.go('viewProduct', {
+          id: product._id
+        });
+      }).catch(errorHandler($scope));
     };
   })
 
@@ -41,14 +41,15 @@ angular.module('reLojaApp')
       id: $stateParams.id
     });
     $scope.editProduct = function () {
-      Product.update({
-          id: $scope.product._id
-        }, $scope.product,
-        function success(value /*, responseHeaders*/ ) {
-          $state.go('viewProduct', {
-            id: value._id
-          });
-        }, errorHandler($scope));
+      return Product.update({
+        id: $scope.product._id
+      }, $scope.product).$promise.then(function (product) {
+        return Product.upload($scope.product.picture, product._id);
+      }).then(function (product) {
+        $state.go('viewProduct', {
+          id: product._id
+        });
+      }).catch(errorHandler($scope));
     };
 
     $scope.upload = uploadHander($scope, Upload, $timeout);
@@ -75,13 +76,13 @@ uploadHander = function ($scope, Upload, $timeout) {
         });
       }, function (response) {
         if (response.status > 0) {
-          console.info(response.status + ': ' + response.data);
+          console.log(response.status + ': ' + response.data);
           errorHandler($scope)(response.status + ': ' + response.data);
         }
       });
 
-      file.upload.progress(function (event) {
-        file.progress = Math.min(100, parseInt(100.0 * event.loaded / event.total));
+      file.upload.progress(function (evt) {
+        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
       });
     }
   };
