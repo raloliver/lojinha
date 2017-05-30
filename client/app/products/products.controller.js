@@ -63,7 +63,7 @@ errorHandler = function ($scope) {
 
 uploadHander = function ($scope, Upload, $timeout) {
   return function (file) {
-    if (file && !file.$error) {
+    if (file) {
       $scope.file = file;
       file.upload = Upload.upload({
         url: '/api/products/' + $scope.product._id + '/upload',
