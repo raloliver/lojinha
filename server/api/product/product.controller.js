@@ -62,7 +62,7 @@ function removeEntity(res) {
 
 function saveFile(res, file) {
   return function (entity) {
-    var newPath = '/assets/uploads/' + path.basename(file.path);
+    var newPath = '/assets/images/uploads/' + path.basename(file.path);
     entity.imageUrl = newPath;
     return entity.saveAsync().spread(function (updated) { 
       return updated;
