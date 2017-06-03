@@ -22,14 +22,14 @@ class SignupController {
         password: this.user.password
       })
       .then(() => {
-        // Account created, redirect to home
+        // Conta criada, redirecionar para a home
         this.$state.go('main');
       })
       .catch(err => {
         err = err.data;
         this.errors = {};
 
-        // Update validity of form fields that match the mongoose errors
+        // Atualizar a validação dos campos de formulário de acordo com os erros 
         angular.forEach(err.errors, (error, field) => {
           form[field].$setValidity('mongoose', false);
           this.errors[field] = error.message;
