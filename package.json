@@ -1,6 +1,6 @@
 {
   "name": "re-loja",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "main": "server/app.js",
   "dependencies": {
     "babel-runtime": "^5.8.20",
