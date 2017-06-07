@@ -10,7 +10,7 @@ angular.module('reLojaApp')
     resource.upload = function (file, productId) {
       var d = $q.defer();
 
-      if (file) {
+      if (file && !file.$error) {
         file.upload = Upload.upload({
           url: '/api/products/' + productId + '/upload',
           file: file
