@@ -11,7 +11,8 @@ angular.module('reLojaApp', [
     'ui.router',
     'ui.bootstrap',
     'validation.match',
-    'ngFileUpload'
+    'ngFileUpload',
+    'ngCart'
   ])
   .config(function ($httpProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
