@@ -12,6 +12,7 @@
 var _ = require('lodash');
 var Product = require('./product.model');
 var path = require('path');
+var Catalog = require('../catalog/catalog.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -70,6 +71,14 @@ function saveFile(res, file) {
   }
 }
 
+function productsInCategory(catalog) {
+  var catalog_ids = [catalog._id].concat(catalog.children);
+  return Product
+    .find({'categories': { $in: catalog_ids } })
+    .populate('categories')
+    .exec();
+}
+
 // Gets a list of Products
 exports.index = function (req, res) {
   Product.findAsync()
@@ -124,3 +133,21 @@ exports.upload = function (req, res) {
     .then(responseWithResult(res))
     .catch(handleError(res));
 }
+
+exports.catalog = function(req, res) {
+  Catalog
+    .findOne({ slug: req.params.slug })
+    .execAsync()
+    .then(productsInCategory)
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+};
+
+exports.search = function(req, res) {
+  Product
+    .find({ $text: { $search: req.params.term }})
+    .populate('categories')
+    .execAsync()
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+};

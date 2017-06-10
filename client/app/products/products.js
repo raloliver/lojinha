@@ -31,5 +31,11 @@ angular.module('reLojaApp')
         url: '/checkout',
         templateUrl: 'app/products/templates/product-checkout.html',
         controller: 'ProductCheckoutCtrl'
+      })
+
+      .state('productCatalog', {
+        url: '/products/:slug/catalog',
+        templateUrl: 'app/products/templates/product-list.html',
+        controller: 'ProductCatalogCtrl'
       });
   });
