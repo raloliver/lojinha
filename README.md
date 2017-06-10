@@ -8,7 +8,7 @@ This project is a simple test to improve my skills.
 
 - [Git](https://git-scm.com/)
 - [Node.js and NPM](http://nodejs.org)
-- [Bower](bower.io) (`npm install --global bower`)
+- [Bower](http://bower.io) (`npm install --global bower`)
 - [Ruby](https://www.ruby-lang.org) and then `gem install sass`
 - [Grunt](http://gruntjs.com/) (`npm install --global grunt-cli`)
 - [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
