@@ -7,6 +7,25 @@ angular.module('reLojaApp')
 
   .controller('ProductsCtrl', function ($scope, Product) {
     $scope.products = Product.query();
+
+    $scope.$on('search:term', function (event, data) {
+      if (data.length) {
+        $scope.products = Product.search({
+          id: data
+        });
+        $scope.query = data;
+      } else {
+        $scope.products = Product.query();
+        $scope.query = '';
+      }
+    });
+  })
+
+  .controller('ProductCatalogCtrl', function ($scope, $stateParams, Product) {
+    $scope.product = Product.catalog({
+      id: $stateParams.slug
+    });
+    $scope.query = $stateParams.slug;
   })
 
   .controller('ProductViewCtrl', function ($scope, $state, $stateParams, Product) {
@@ -73,7 +92,7 @@ angular.module('reLojaApp')
         }
       };
     });
-    
+
 errorHandler = function ($scope) {
   return function error(httpResponse) {
     $scope.errors = httpResponse;

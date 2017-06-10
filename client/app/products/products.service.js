@@ -5,6 +5,20 @@ angular.module('reLojaApp')
     var resource = $resource('/api/products/:id/:controller', null, {
       'update': {
         method: 'PUT'
+      },
+      'catalog': {
+        method: 'GET',
+        isArray: true,
+        params: {
+          controller: 'catalog'
+        }
+      },
+      'search': {
+        method: 'GET',
+        isArray: true,
+        params: {
+          controller: 'search'
+        }
       }
     });
     resource.upload = function (file, productId) {

@@ -12,6 +12,8 @@ var uploadOptions = {
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
+router.get('/:slug/catalog', controller.catalog);
+router.get('/:term/search', controller.search);
 router.post('/', controller.create);
 router.post('/:id/upload', multiparty(uploadOptions), controller.upload);
 router.put('/:id', controller.update);
