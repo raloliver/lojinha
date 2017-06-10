@@ -1,13 +1,13 @@
-# re-loja
+# lojinha
 
-This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.0.0.
+This project is a simple test to improve my skills.
 
 ## Getting Started
 
 ### Prerequisites
 
 - [Git](https://git-scm.com/)
-- [Node.js and NPM](nodejs.org) >= v0.12.0
+- [Node.js and NPM](nodejs.org)
 - [Bower](bower.io) (`npm install --global bower`)
 - [Ruby](https://www.ruby-lang.org) and then `gem install sass`
 - [Grunt](http://gruntjs.com/) (`npm install --global grunt-cli`)
