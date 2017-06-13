@@ -132,7 +132,7 @@ exports.upload = function (req, res) {
     .then(saveFile(res, file))
     .then(responseWithResult(res))
     .catch(handleError(res));
-}
+};
 
 exports.catalog = function(req, res) {
   Catalog

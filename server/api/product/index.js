@@ -10,14 +10,16 @@ var uploadOptions = {
   uploadDir: 'client/assets/images/uploads'
 }
 
+var auth = require('../../auth/auth.service');
+
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.get('/:slug/catalog', controller.catalog);
 router.get('/:term/search', controller.search);
-router.post('/', controller.create);
+router.post('/', auth.hasRole('admin'),controller.create);
 router.post('/:id/upload', multiparty(uploadOptions), controller.upload);
-router.put('/:id', controller.update);
-router.patch('/:id', controller.update);
-router.delete('/:id', controller.destroy);
+router.put('/:id', auth.hasRole('admin'), controller.update);
+router.patch('/:id', auth.hasRole('admin'), controller.update);
+router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 
 module.exports = router;
